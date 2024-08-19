@@ -6,5 +6,6 @@
     'application': True,
     'installable': True,
     'license': 'LGPL-3',
+    'category': 'Brokerage',
     'data': []
 }
