@@ -5,9 +5,11 @@ class EstatePropertyInherited(models.Model):
     _inherit = "estate.property"
 
     def action_sell(self):
-        result = super().action_sell()
+        self.check_access_rights('write')
 
         for property in self:
+            property.check_access_rule('write')
+
             # Calculate 6% of the selling price
             six_percent = property.selling_price * 0.06
             admin_fee = 100.00
@@ -32,8 +34,7 @@ class EstatePropertyInherited(models.Model):
                 'move_type': 'out_invoice',
                 'invoice_line_ids': [(0, 0, line) for line in invoice_line_vals],
             }
-
             # Create the invoice
             self.env['account.move'].sudo().create(move_vals)
 
-        return result
+        return super().action_sell()
