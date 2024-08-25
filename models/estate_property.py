@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import models
 
 
 class EstatePropertyInherited(models.Model):
@@ -7,11 +7,11 @@ class EstatePropertyInherited(models.Model):
     def action_sell(self):
         self.check_access_rights('write')
 
-        for property in self:
-            property.check_access_rule('write')
+        for prop in self:
+            prop.check_access_rule('write')
 
             # Calculate 6% of the selling price
-            six_percent = property.selling_price * 0.06
+            six_percent = prop.selling_price * 0.06
             admin_fee = 100.00
 
             # Prepare the invoice lines
@@ -30,7 +30,7 @@ class EstatePropertyInherited(models.Model):
 
             # Prepare the move (invoice) values
             move_vals = {
-                'partner_id': property.buyer.id,
+                'partner_id': prop.buyer.id,
                 'move_type': 'out_invoice',
                 'invoice_line_ids': [(0, 0, line) for line in invoice_line_vals],
             }
