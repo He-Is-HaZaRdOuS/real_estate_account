@@ -7,5 +7,7 @@
     'installable': True,
     'license': 'LGPL-3',
     'category': 'Brokerage',
-    'data': []
+    'data': [
+        'report/estate_pdf_template_inherited.xml',
+    ]
 }

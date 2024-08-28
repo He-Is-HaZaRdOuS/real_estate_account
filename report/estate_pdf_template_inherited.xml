@@ -1,0 +1,12 @@
+<odoo>
+    <template id="report_res_users_properties_inherit" inherit_id="real_estate.report_res_users_properties_t">
+        <xpath expr="//div[contains(@id, 'state')]" position="after">
+            <t t-if="len(property.invoice_ids) > 0">
+                <div>
+                    <strong>Invoice Exists, totalling to: </strong>
+                    <span t-field="property.invoice_ids[0].amount_total"/>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>
